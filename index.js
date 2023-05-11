@@ -23,21 +23,14 @@ const prompt = mysql.createConnection({
 console.log('Connected to MySQL database!');
 
 const apiKey = openai;
-(async () => {
-  try {
-    const response = await openai.complete({
-      engine: 'davinci',
-      prompt,
-      max_tokens: 5,
-      n: 1,
-      stop: '\n',
-    });
-    const { data } = response;
-    console.log(data);
-  } catch (err) {
-    console.error(err);
-  }
-})();
+
+openai.createCompletion({
+    model: 'text-davinci-003',
+    prompt: prompt,
+    max_tokens: 7,
+    temperature: 0
+})
+
 
 const userInterface = readline.createInterface({
     input: process.stdin,
